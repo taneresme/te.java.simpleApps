@@ -1,7 +1,18 @@
 package te.simpleApps.contentSearcher.config;
 
-/**
- * Created by e062078 on 1/2/2018.
- */
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@ConfigurationProperties(prefix = "contentSearcher")
+@Configuration
 public class Config {
+    private Boolean showColors;
+
+    public Boolean getShowColors() {
+        return showColors;
+    }
+
+    public void setShowColors(Boolean showColors) {
+        this.showColors = showColors;
+    }
 }

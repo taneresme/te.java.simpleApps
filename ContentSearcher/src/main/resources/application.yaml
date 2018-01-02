@@ -1,1 +1,2 @@
-ContentSearcher.showColors = true
+contentSearcher:
+    showColors: false

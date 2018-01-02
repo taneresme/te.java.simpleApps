@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import te.simpleApps.contentSearcher.config.Config;
 import te.simpleApps.contentSearcher.console.Console;
 import te.simpleApps.contentSearcher.search.Searcher;
 
@@ -14,6 +15,9 @@ public class Application implements CommandLineRunner {
     private Console console;
     @Autowired
     private Searcher searcher;
+    @Autowired
+    private Config config;
+
 
     public static void main(String[] args) {
         /*Disable logging*/
@@ -26,6 +30,11 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) {
         try {
+            if (config.getShowColors()) {
+                System.setProperty("jansi.passthrough", "true");
+                console.showColors();
+            }
+
             /*Read folder name to search*/
             String folder = console.in("Folder path to search: ");
 

@@ -28,7 +28,7 @@ public class Searcher {
         this.searchees = searchees;
         searchee = this.searchees[0];
         for (int i = 1; i < this.searchees.length; i++) {
-            searchee = searchee + "|" + this.searchees[i];
+            searchee = String.format("%s|%s", searchee, this.searchees[i]);
         }
 
         search(folder);
@@ -53,22 +53,22 @@ public class Searcher {
             List<String> lines = Files.readAllLines(file.toPath());
 
             Pattern pattern = Pattern.compile(String.format("(?i)((?:%s))", searchee));
-            for (String line : lines) {
-                Matcher matcher = pattern.matcher(line);
+            for (int i = 0; i < lines.size(); i++) {
+                Matcher matcher = pattern.matcher(lines.get(i));
                 if (matcher.find()) {
                     if (!fileWritten) {
-                        console.blueLn("File: " + file.getPath());
+                        console.blueLn(String.format("File: %s", file.getPath()));
                         fileWritten = true;
                     }
-                    console.cyanLn("\t" + line);
+                    console.cyanLn(String.format("\t%d %s", i, lines.get(i)));
                 }
             }
         } catch (Exception ex) {
             if (!fileWritten) {
-                console.err("File: " + file.getPath());
+                console.err(String.format("File: %s", file.getPath()));
                 fileWritten = true;
             }
-            console.err("\t" + ex.toString());
+            console.err(String.format("\t%s", ex.toString()));
         }
     }
 }

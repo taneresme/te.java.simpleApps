@@ -22,28 +22,32 @@
         </dependency>
     </dependencies>
 
-    <!--<profiles>
+    <profiles>
         <profile>
             <id>create-jar-profile</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.0.2</version>
                         <configuration>
                             <jarName>ContentSearcher</jarName>
-                            <includes>
-                                <include>**/run.bat</include>
-                                <include>**/application.yaml</include>
-                            </includes>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                    <mainClass>te.simpleApps.contentSearcher.Application</mainClass>
+                                </manifest>
+                            </archive>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-    </profiles>-->
+    </profiles>
 
 </project>

@@ -39,15 +39,17 @@ public class Application implements CommandLineRunner {
             String folder = console.in("Folder path to search: ");
 
             /*Read texts to be searched*/
-            String textsInput = console.in("Texts to search (use comma for multiple input): ");
+            String textsInput = console.in("Texts to search (use (,) for multiple input, use (:) for decimal range): ");
             String[] texts = textsInput.split(",");
 
             searcher.search(folder, texts);
-
+        } catch (Exception ex) {
+            console.err(ex.toString());
+        }
+        try {
             console.normal("Press any key to exit...");
             console.in();
         } catch (Exception ex) {
-            console.err(ex.toString());
         }
     }
 }
